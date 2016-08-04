@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using XmlToObjectConvertor;
 using XmlToObjectConvertor.DataAccessLayer;
+using XMLToObjectConvertor.BusinessLogicLayer;
 
 namespace XmlConverter
 {
@@ -25,6 +26,7 @@ namespace XmlConverter
         string xmlFromObject = null;
 
         DBConnection dbc = new DBConnection();
+        Functions blFunc = new Functions();
 
         public MainForm()
         {
@@ -44,7 +46,7 @@ namespace XmlConverter
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
             openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "TXT Files (.txt)|*.txt";
+            openFileDialog.Filter = "XML Files (.xml)|*.xml";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -65,9 +67,10 @@ namespace XmlConverter
 
         private void btnConvertToObject_Click(object sender, EventArgs e)
         {
+
             if (!string.IsNullOrEmpty(xmlFile))
             {
-                personList = Deserialize<List<Person>>(xmlFile);
+                personList = blFunc.Deserialize<List<Person>>(xmlFile);
 
                 if (personList != null)
                     FillRichTextBox(personList);
@@ -77,38 +80,6 @@ namespace XmlConverter
                 MessageBox.Show("You must upload File before converting!","Warning");
             }
 
-        }
-
-        public T Deserialize<T>(string input) where T : class
-        {
-            try
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(T), new XmlRootAttribute("PersonList"));
-
-                using (StringReader stringReader = new StringReader(input))
-                    return (T) serializer.Deserialize(stringReader);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message,"Error");
-                return null;
-            }
-        }
-
-        public string Serialize(List<Person> personList)
-        {
-            XmlSerializer ser = new XmlSerializer(personList.GetType(), "MyPersonList");
-            string result = string.Empty;
-
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                ser.Serialize(memoryStream, personList);
-
-                memoryStream.Position = 0;
-                result = new StreamReader(memoryStream).ReadToEnd();
-            }
-
-            return result;
         }
 
         private void FillRichTextBox(List<Person> personList)
@@ -153,7 +124,7 @@ namespace XmlConverter
                 string fileName = DateTime.Now.ToString("ddMMyyyy") + "_XML.xml";
                 string fullPath = convertedXMLFilePath + @"\" + fileName;
 
-                string xmlFromObject = Serialize(dbc.Select());
+                string xmlFromObject = blFunc.Serialize(dbc.Select());
 
                 if (xmlFromObject.Contains("<Person>"))
                 {

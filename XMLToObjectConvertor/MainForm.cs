@@ -44,6 +44,11 @@ namespace XmlConverter
             }
         }
 
+        public void setDBListBox(List<Person> pList)
+        {
+            dbListBox.DataSource = pList;
+        }
+
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
             openFileDialog = new OpenFileDialog();
@@ -133,7 +138,6 @@ namespace XmlConverter
         {
             CreatePerson newPerson = new CreatePerson(this);
             newPerson.Show();
-            dbListBox.DataSource = dbc.Select();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -155,5 +159,6 @@ namespace XmlConverter
         {
             Logger.Write("MainForm loaded..");
         }
+
     }
 }

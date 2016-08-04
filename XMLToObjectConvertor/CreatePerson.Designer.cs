@@ -142,6 +142,7 @@
             this.Name = "CreatePerson";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "CreatePerson";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CreatePerson_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

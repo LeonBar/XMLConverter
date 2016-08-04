@@ -15,12 +15,12 @@ namespace XmlToObjectConvertor
     {
         List<Person> newPersonList = new List<Person>();
         DBConnection dbc = new DBConnection();
-        Form parentForm;
+        Form pForm;
 
-        public CreatePerson(Form p)
+        public CreatePerson(Form parentForm)
         {
             InitializeComponent();
-            parentForm = p;
+            pForm = parentForm;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -47,5 +47,11 @@ namespace XmlToObjectConvertor
             }
 
         }
+
+        private void CreatePerson_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //pForm
+        }
+
     }
 }

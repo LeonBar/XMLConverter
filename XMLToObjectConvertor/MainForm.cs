@@ -27,12 +27,13 @@ namespace XmlConverter
 
         DBConnection dbc = new DBConnection();
         Functions blFunc = new Functions();
-
+        
         public MainForm()
         {
             InitializeComponent();
             dbPersonList = dbc.Select();
-            btnLoad_Click(this, null);
+            dbListBox.DataSource = dbc.Select();
+
             try
             {
                 convertedXMLFilePath = ConfigurationSettings.AppSettings["ConvertedXMLPath"];
@@ -52,7 +53,7 @@ namespace XmlConverter
             {
                 string file = openFileDialog.FileName;
                 txtFileName.Text = Path.GetFileName(file);
-                this.Refresh();
+                dbListBox.DataSource = dbc.Select();
 
                 try
                 {
@@ -73,20 +74,11 @@ namespace XmlConverter
                 personList = blFunc.Deserialize<List<Person>>(xmlFile);
 
                 if (personList != null)
-                    FillRichTextBox(personList);
+                    listBox.DataSource = personList;
             }
             else
             {
                 MessageBox.Show("You must upload File before converting!","Warning");
-            }
-
-        }
-
-        private void FillRichTextBox(List<Person> personList)
-        {
-            foreach(Person person in personList)
-            {
-                listBox.Items.Add(person.ToString());
             }
         }
 
@@ -97,7 +89,7 @@ namespace XmlConverter
             {
                 Logger.Write("Inserting to database");
                 dbc.Insert(personList);
-                btnLoad_Click(this, null);
+                dbListBox.DataSource = dbc.Select();
             }
             else
                 MessageBox.Show("Your list is empty!");
@@ -105,14 +97,7 @@ namespace XmlConverter
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            dbListBox.Items.Clear();
-
-            dbPersonList = dbc.Select();
-
-            foreach(Person person in dbPersonList)
-            {
-                dbListBox.Items.Add(person.ToString());
-            }
+            dbListBox.DataSource = dbc.Select();
         }
 
         private void btnMakeXML_Click(object sender, EventArgs e)
@@ -146,8 +131,9 @@ namespace XmlConverter
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            CreatePerson newPerson = new CreatePerson();
+            CreatePerson newPerson = new CreatePerson(this);
             newPerson.Show();
+            dbListBox.DataSource = dbc.Select();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -156,7 +142,7 @@ namespace XmlConverter
             {
                 string id = dbListBox.Text.Split(',')[0].Split(':')[1].Trim();
                 dbc.Delete(id);
-                btnLoad_Click(this, null);
+                dbListBox.DataSource = dbc.Select();
             }
             catch(Exception ex)
             {

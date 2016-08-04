@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.txtFileName = new System.Windows.Forms.TextBox();
             this.btnOpenFile = new System.Windows.Forms.Button();
@@ -42,7 +43,11 @@
             this.dbListBox = new System.Windows.Forms.ListBox();
             this.btnLoad = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
+            this.xMLToObjDBDataSet = new XmlToObjectConvertor.DataAccessLayer.XMLToObjDBDataSet();
+            this.xMLToObjDBDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBoxDatabase.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xMLToObjDBDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xMLToObjDBDataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -150,6 +155,7 @@
             // 
             // dbListBox
             // 
+            this.dbListBox.DataSource = this.xMLToObjDBDataSetBindingSource;
             this.dbListBox.FormattingEnabled = true;
             this.dbListBox.HorizontalScrollbar = true;
             this.dbListBox.Location = new System.Drawing.Point(6, 47);
@@ -177,6 +183,16 @@
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
+            // xMLToObjDBDataSet
+            // 
+            this.xMLToObjDBDataSet.DataSetName = "XMLToObjDBDataSet";
+            this.xMLToObjDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // xMLToObjDBDataSetBindingSource
+            // 
+            this.xMLToObjDBDataSetBindingSource.DataSource = this.xMLToObjDBDataSet;
+            this.xMLToObjDBDataSetBindingSource.Position = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -191,9 +207,11 @@
             this.Controls.Add(this.btnOpenFile);
             this.Controls.Add(this.txtFileName);
             this.Name = "MainForm";
-            this.Text = "XML To Object Converter";
+            this.Text = "XML Converter";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBoxDatabase.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xMLToObjDBDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xMLToObjDBDataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -215,6 +233,8 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.BindingSource xMLToObjDBDataSetBindingSource;
+        private XmlToObjectConvertor.DataAccessLayer.XMLToObjDBDataSet xMLToObjDBDataSet;
     }
 }
 

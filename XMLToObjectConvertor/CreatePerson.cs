@@ -48,10 +48,14 @@ namespace XmlToObjectConvertor
 
         }
 
-        private void CreatePerson_FormClosed(object sender, FormClosedEventArgs e)
+        private void txtID_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //pForm
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
+        private void txtAge_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
     }
 }

@@ -63,9 +63,11 @@
             // txtID
             // 
             this.txtID.Location = new System.Drawing.Point(110, 12);
+            this.txtID.MaxLength = 9;
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(162, 20);
             this.txtID.TabIndex = 2;
+            this.txtID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtID_KeyPress);
             // 
             // txtFirstName
             // 
@@ -84,9 +86,11 @@
             // txtAge
             // 
             this.txtAge.Location = new System.Drawing.Point(110, 90);
+            this.txtAge.MaxLength = 3;
             this.txtAge.Name = "txtAge";
             this.txtAge.Size = new System.Drawing.Size(162, 20);
             this.txtAge.TabIndex = 5;
+            this.txtAge.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAge_KeyPress);
             // 
             // idLabel
             // 
@@ -142,7 +146,6 @@
             this.Name = "CreatePerson";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "CreatePerson";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CreatePerson_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

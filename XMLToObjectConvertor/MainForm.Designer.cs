@@ -43,7 +43,6 @@
             this.dbListBox = new System.Windows.Forms.ListBox();
             this.xMLToObjDBDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.xMLToObjDBDataSet = new XmlToObjectConvertor.DataAccessLayer.XMLToObjDBDataSet();
-            this.btnLoad = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.groupBoxDatabase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xMLToObjDBDataSetBindingSource)).BeginInit();
@@ -115,7 +114,6 @@
             this.groupBoxDatabase.Controls.Add(this.btnDelete);
             this.groupBoxDatabase.Controls.Add(this.btnEdit);
             this.groupBoxDatabase.Controls.Add(this.dbListBox);
-            this.groupBoxDatabase.Controls.Add(this.btnLoad);
             this.groupBoxDatabase.Location = new System.Drawing.Point(318, 10);
             this.groupBoxDatabase.Name = "groupBoxDatabase";
             this.groupBoxDatabase.Size = new System.Drawing.Size(293, 304);
@@ -158,9 +156,9 @@
             this.dbListBox.DataSource = this.xMLToObjDBDataSetBindingSource;
             this.dbListBox.FormattingEnabled = true;
             this.dbListBox.HorizontalScrollbar = true;
-            this.dbListBox.Location = new System.Drawing.Point(6, 47);
+            this.dbListBox.Location = new System.Drawing.Point(6, 21);
             this.dbListBox.Name = "dbListBox";
-            this.dbListBox.Size = new System.Drawing.Size(279, 160);
+            this.dbListBox.Size = new System.Drawing.Size(279, 186);
             this.dbListBox.TabIndex = 7;
             // 
             // xMLToObjDBDataSetBindingSource
@@ -172,16 +170,6 @@
             // 
             this.xMLToObjDBDataSet.DataSetName = "XMLToObjDBDataSet";
             this.xMLToObjDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // btnLoad
-            // 
-            this.btnLoad.Location = new System.Drawing.Point(6, 18);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(279, 23);
-            this.btnLoad.TabIndex = 1;
-            this.btnLoad.Text = "Refresh";
-            this.btnLoad.UseVisualStyleBackColor = true;
-            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // btnNew
             // 
@@ -197,7 +185,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(626, 318);
+            this.ClientSize = new System.Drawing.Size(622, 318);
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.groupBoxDatabase);
             this.Controls.Add(this.btnUpdateAll);
@@ -207,8 +195,8 @@
             this.Controls.Add(this.btnOpenFile);
             this.Controls.Add(this.txtFileName);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "XML Converter";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBoxDatabase.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.xMLToObjDBDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xMLToObjDBDataSet)).EndInit();
@@ -227,7 +215,6 @@
         private System.Windows.Forms.Button btnUpdateSelected;
         private System.Windows.Forms.Button btnUpdateAll;
         private System.Windows.Forms.GroupBox groupBoxDatabase;
-        private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.Button btnMakeXML;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;

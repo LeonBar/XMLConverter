@@ -13,7 +13,7 @@ namespace XmlToObjectConvertor
 {
     public partial class CreatePerson : Form
     {
-        List<Person> newPersonList = new List<Person>();
+        IList<Person> newPersonList = new List<Person>();
         DBConnection dbc = new DBConnection();
         Form pForm;
 
@@ -34,23 +34,19 @@ namespace XmlToObjectConvertor
             {
                 if (!string.IsNullOrEmpty(txtID.Text) && !string.IsNullOrEmpty(txtFirstName.Text) && !string.IsNullOrEmpty(txtLastName.Text) && !string.IsNullOrEmpty(txtAge.Text))
                 {
+
                     newPersonList.Add(new Person(Int32.Parse(txtID.Text), txtFirstName.Text, txtLastName.Text, Int32.Parse(txtAge.Text)));
                     dbc.Insert(newPersonList);
                     this.Close();
                 }
                 else
-                    MessageBox.Show("All fields must be initialized!", "Error");
+                    lbError.Text = "All fields must be initialized!";
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message,"Error");
             }
 
-        }
-
-        private void CreatePerson_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            //pForm
         }
 
     }

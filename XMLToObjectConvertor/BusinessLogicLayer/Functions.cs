@@ -28,7 +28,7 @@ namespace XMLToObjectConvertor.BusinessLogicLayer
             }
         }
 
-        public string Serialize(List<Person> personList)
+        public string Serialize(IList<Person> personList)
         {
             XmlSerializer ser = new XmlSerializer(personList.GetType(), new XmlRootAttribute("PersonList"));
             string result = string.Empty;

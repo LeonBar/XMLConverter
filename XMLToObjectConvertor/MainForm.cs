@@ -12,14 +12,15 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using XmlToObjectConvertor;
 using XmlToObjectConvertor.DataAccessLayer;
+using XMLToObjectConvertor;
 using XMLToObjectConvertor.BusinessLogicLayer;
 
 namespace XmlConverter
 {
     public partial class MainForm : Form
     {
-        List<Person> personList;
-        List<Person> dbPersonList;
+        IList<Person> personList;
+        IList<Person> dbPersonList;
 
         string xmlFile = null;
         string convertedXMLFilePath = null;
@@ -44,7 +45,7 @@ namespace XmlConverter
             }
         }
 
-        public void setDBListBox(List<Person> pList)
+        public void setDBListBox(IList<Person> pList)
         {
             dbListBox.DataSource = pList;
         }
@@ -112,7 +113,7 @@ namespace XmlConverter
             try
             {
                 string fileName = DateTime.Now.ToString("ddMMyyyy") + "_XML.xml";
-                string fullPath = convertedXMLFilePath + @"\" + fileName;
+                string fullPath = convertedXMLFilePath + fileName;
 
                 string xmlFromObject = blFunc.Serialize(dbc.Select());
 
@@ -137,7 +138,8 @@ namespace XmlConverter
         private void btnNew_Click(object sender, EventArgs e)
         {
             CreatePerson newPerson = new CreatePerson(this);
-            newPerson.Show();
+            var dialogResult = newPerson.ShowDialog();
+            dbListBox.DataSource = dbc.Select();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -154,11 +156,5 @@ namespace XmlConverter
                 MessageBox.Show("Please select row you want to delete.","Error");
             }
         }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            Logger.Write("MainForm loaded..");
-        }
-
     }
 }

@@ -16,10 +16,10 @@ namespace XmlToObjectConvertor.DataAccessLayer
 
         public DBConnection()
         {
-            ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\MyDevelopment\XMLToObjectConvertor\XMLToObjectConvertor\DataAccessLayer\XMLToObjDB.mdf;Integrated Security=True";
+            ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Development\XMLConverter\XMLToObjectConvertor\DataAccessLayer\XMLToObjDB.mdf;Integrated Security=True;Connect Timeout=30";
         }
 
-        public bool Insert(List<Person> personList)
+        public bool Insert(IList<Person> personList)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace XmlToObjectConvertor.DataAccessLayer
             }
         }
 
-        public List<Person> Select()
+        public IList<Person> Select()
         {
             List<Person> pList = new List<Person>();
 

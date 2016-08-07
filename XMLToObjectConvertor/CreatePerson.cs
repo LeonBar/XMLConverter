@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using XmlToObjectConvertor.DataAccessLayer;
@@ -13,7 +14,7 @@ namespace XmlToObjectConvertor
 {
     public partial class CreatePerson : Form
     {
-        IList<Person> newPersonList = new List<Person>();
+        List<Person> newPersonList = new List<Person>();
         DBConnection dbc = new DBConnection();
         Form pForm;
 
@@ -34,13 +35,12 @@ namespace XmlToObjectConvertor
             {
                 if (!string.IsNullOrEmpty(txtID.Text) && !string.IsNullOrEmpty(txtFirstName.Text) && !string.IsNullOrEmpty(txtLastName.Text) && !string.IsNullOrEmpty(txtAge.Text))
                 {
-
                     newPersonList.Add(new Person(Int32.Parse(txtID.Text), txtFirstName.Text, txtLastName.Text, Int32.Parse(txtAge.Text)));
                     dbc.Insert(newPersonList);
                     this.Close();
                 }
                 else
-                    lbError.Text = "All fields must be initialized!";
+                    MessageBox.Show("All fields must be initialized!", "Error");
             }
             catch(Exception ex)
             {
@@ -49,5 +49,24 @@ namespace XmlToObjectConvertor
 
         }
 
+        private void txtID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void txtAge_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void txtFirstName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar);
+        }
+
+        private void txtLastName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar);
+        }
     }
 }

@@ -64,30 +64,38 @@
             // txtID
             // 
             this.txtID.Location = new System.Drawing.Point(110, 12);
+            this.txtID.MaxLength = 9;
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(162, 20);
             this.txtID.TabIndex = 2;
+            this.txtID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtID_KeyPress);
             // 
             // txtFirstName
             // 
             this.txtFirstName.Location = new System.Drawing.Point(110, 38);
+            this.txtFirstName.MaxLength = 15;
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(162, 20);
             this.txtFirstName.TabIndex = 3;
+            this.txtFirstName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFirstName_KeyPress);
             // 
             // txtLastName
             // 
             this.txtLastName.Location = new System.Drawing.Point(110, 64);
+            this.txtLastName.MaxLength = 25;
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(162, 20);
             this.txtLastName.TabIndex = 4;
+            this.txtLastName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLastName_KeyPress);
             // 
             // txtAge
             // 
             this.txtAge.Location = new System.Drawing.Point(110, 90);
+            this.txtAge.MaxLength = 3;
             this.txtAge.Name = "txtAge";
             this.txtAge.Size = new System.Drawing.Size(162, 20);
             this.txtAge.TabIndex = 5;
+            this.txtAge.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAge_KeyPress);
             // 
             // idLabel
             // 

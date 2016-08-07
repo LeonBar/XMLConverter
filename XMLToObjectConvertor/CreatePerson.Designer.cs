@@ -72,16 +72,20 @@
             // txtFirstName
             // 
             this.txtFirstName.Location = new System.Drawing.Point(110, 38);
+            this.txtFirstName.MaxLength = 15;
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(162, 20);
             this.txtFirstName.TabIndex = 3;
+            this.txtFirstName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFirstName_KeyPress);
             // 
             // txtLastName
             // 
             this.txtLastName.Location = new System.Drawing.Point(110, 64);
+            this.txtLastName.MaxLength = 25;
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(162, 20);
             this.txtLastName.TabIndex = 4;
+            this.txtLastName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLastName_KeyPress);
             // 
             // txtAge
             // 
